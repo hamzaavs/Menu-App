@@ -25,7 +25,7 @@ onMounted(() => {
 
 <template>
   <body class="w-screen h-screen bg-primary flex justify-center items-center">
-    <div class="w-10/12 grid grid-cols-3 gap-10">
+    <div class="w-10/12 grid grid-cols-3 gap-10 mt-28">
       <div
         v-for="item in products"
         :key="item.name"
@@ -42,7 +42,7 @@ onMounted(() => {
           </p>
           <p
             v-else-if="item.stock > 0 && item.stock < 10"
-            class="text-green-500 text-right text-base">
+            class="text-yellow-500 text-right text-base">
             {{ item.stock }} Adet kaldı
           </p>
           <p
