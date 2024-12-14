@@ -11,7 +11,10 @@ export default {
         description: "#6C757D",
         price: "#28A745",
         primary: "#F8F9FA",
-      }
+      },
+        fontFamily: {
+          'sans': ['Helvetica', 'Poppins', 'sans-serif'],
+        },
     },
   },
   plugins: [],
