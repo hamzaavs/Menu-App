@@ -21,6 +21,7 @@ from django.urls.conf import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dishes/', include('dishes.urls')),
+    path('user/', include('user.urls')),
 ]
 
 handler404 = 'newproject.views.error_404_view'

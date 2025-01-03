@@ -1,5 +1,9 @@
+<script setup>
+import DefaultLayout from "@/layout/DefaultLayout.vue";
+</script>
+
 <template>
-  <div class="w-screen h-screen bg-gray-100 flex justify-center items-center font-sans">
+  <DefaultLayout>
     <router-view/>
-  </div>
+  </DefaultLayout>
 </template>

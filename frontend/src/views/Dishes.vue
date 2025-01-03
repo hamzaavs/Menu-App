@@ -33,7 +33,7 @@ onMounted(() => {
     >
       <p></p>
       <h1 class="text-title text-2xl font-bold mb-2">{{ item.name }}</h1>
-      <p class="text-price text-lg mb-10">{{ item.price }}</p>
+      <p class="text-price text-lg mb-10">{{ item.price }}₺</p>
       <router-link :to="`/dish/${item.id}`" class="bg-primary text-black p-2 m rounded-md">İncele</router-link>
     </div>
   </div>

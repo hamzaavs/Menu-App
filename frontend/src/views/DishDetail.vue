@@ -42,6 +42,6 @@ onMounted(() => {
           {{dish.stock}} Adet Kaldı
       </p>
     </div>
-    <button class="mb-14 text-2xl bg-blue-400 text-white w-48 h-20 mx-auto rounded-full">Sipariş Ver</button>
+    <button class="mb-14 text-2xl bg-blue-400 text-white w-48 h-20 mx-auto rounded-fulln dev">Sipariş Ver</button>
   </div>
 </template>
