@@ -1,7 +1,7 @@
 <script setup>
-import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import api from "@/api/axios.js";
 
 const route = useRoute();
 const id = route.params.id;
@@ -9,7 +9,7 @@ const id = route.params.id;
 const dish = ref({});
 
 const getDishDetail = async () => {
-  await axios.get(`http://127.0.0.1:8000/dishes/${id}`)
+  await api.get(`dishes/${id}`)
     .then((res) => {
       dish.value = res.data;
     });

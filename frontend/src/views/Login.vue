@@ -1,26 +1,20 @@
 <script setup>
 import { ref } from 'vue'
-import axios from "axios";
+import {useAuthStore} from "@/store/auth.js";
+import {useRouter} from "vue-router";
 
 const email = ref('')
 const password = ref('')
 const message = ref('')
 
-const login = async () => {
-  const response = await axios.post('http://127.0.0.1:8000/user/login/', {
-    email: email.value,
-    password: password.value
-  })
-  if (response.status === 200) {
-    localStorage.setItem('token', response.data.token)
-    localStorage.setItem('user', JSON.stringify(response.data.user))
-    window.location.href = '/'
-    message.value = 'Giriş yapıldı.'
+const authStore = useAuthStore();
+const router = useRouter();
 
-  } else {
-    alert('Giriş yapılamadı. Lütfen tekrar deneyiniz.')
-  }
+const login = async () => {
+  await authStore.login(email.value, password.value);
+  router.push('/profile');
 }
+
 </script>
 
 <template>

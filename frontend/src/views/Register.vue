@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import axios from "axios";
+import {useAuthStore} from "@/store/auth.js";
+import {useRouter} from "vue-router";
 
 const email = ref('')
 const password = ref('')
@@ -9,19 +10,22 @@ const surname = ref('')
 const phone = ref()
 const message = ref('')
 
+const authStore = useAuthStore();
+const router = useRouter();
+
+
+
 const register = async () => {
-  const response = await axios.post('http://127.0.0.1:8000/user/register/', {
+  const success = await authStore.register({
     email: email.value,
     password: password.value,
     name: name.value,
     surname: surname.value,
     phone: phone.value
-  })
+  });
 
-  if(response.status === 201) {
-    message.value = "Kayıt olunmuştur"
-  } else {
-    message.value = "Kayıt olunamadı. Lütfen tekrar deneyiniz."
+  if (success) {
+    router.push('/login');
   }
 }
 

@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import api from "@/api/axios.js";
 
 const products = ref([{
   id: "",
@@ -11,7 +12,7 @@ const products = ref([{
 }])
 
 const listProducts = async () =>{
-  await axios.get("http://127.0.0.1:8000/dishes/list/")
+  await api.get("http://127.0.0.1:8000/dishes/list/")
     .then((res) => {
       products.value = res.data;
     })
