@@ -4,4 +4,4 @@
 /package.json
 /package-lock.json
 
-db.sqlite3
+backend/newproject/db.sqlite3
