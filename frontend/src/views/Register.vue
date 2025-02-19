@@ -16,14 +16,7 @@ const router = useRouter();
 
 
 const register = async () => {
-  const success = await authStore.register({
-    email: email.value,
-    password: password.value,
-    name: name.value,
-    surname: surname.value,
-    phone: phone.value
-  });
-
+  const success = await authStore.register(name.value, surname.value, email.value , phone.value, password.value);
   if (success) {
     router.push('/login');
   }
