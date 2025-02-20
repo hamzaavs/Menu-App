@@ -2,6 +2,14 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 
+class Role(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    description = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -14,10 +22,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    surname = models.CharField(max_length=150)
     name = models.CharField(max_length=150)
+    surname = models.CharField(max_length=150)
     phone = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
+    roles = models.ManyToManyField('Role', blank=True)
 
     username = None
     USERNAME_FIELD = 'email'
@@ -27,3 +36,5 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.name
+
+
