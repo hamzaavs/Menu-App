@@ -38,6 +38,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             surname=validated_data['surname'],
             phone=validated_data['phone']
         )
+
+        default_role = Role.objects.get(id=2)
+        user.roles.add(default_role)
+
         return user
 
 
