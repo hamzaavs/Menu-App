@@ -1,25 +1,12 @@
 <script setup>
-import axios from "axios";
-import { ref, onMounted } from "vue";
-import api from "@/api/axios.js";
+import {onMounted} from "vue";
+import {useDishStore} from "@/store/dish.js";
 
-const products = ref([{
-  id: "",
-  name: "",
-  description: "",
-  price: "",
-  stock: ""
-}])
 
-const listProducts = async () =>{
-  await api.get("http://127.0.0.1:8000/dishes/list/")
-    .then((res) => {
-      products.value = res.data;
-    })
-}
+const dishStore = useDishStore()
 
 onMounted(() => {
-  listProducts();
+  dishStore.list()
 })
 
 </script>
@@ -28,7 +15,7 @@ onMounted(() => {
 <template>
   <div class="w-3/5 grid grid-cols-3 gap-10 mt-28 ease-in ">
     <div
-      v-for="item in products"
+      v-for="item in dishStore.dishes"
       :key="item.name"
       class="text-center bg-white p-10 shadow-lg rounded-md duration-300 hover:translate-y-[-15px]"
     >
