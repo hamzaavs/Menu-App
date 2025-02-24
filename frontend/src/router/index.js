@@ -6,6 +6,7 @@ import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
 import Profile from "@/views/Profile.vue";
 import {useAuthStore} from "@/store/auth.js";
+import AddDish from "@/views/AddDish.vue";
 
 
 const routes = [
@@ -34,7 +35,13 @@ const routes = [
         component: Profile,
         meta: { requiresAuth: true },
         name: 'profile'
-    }
+    },
+    {
+        path: '/add-dish',
+        component: AddDish,
+        meta: { requiresAuth: true },
+        name: 'add-dish'
+    },
 ]
 
 const router = createRouter({
@@ -50,7 +57,7 @@ router.beforeEach(async (to, from, next) => {
     }
 
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-        next("/profile");
+        next("/");
     } else {
         next();
     }

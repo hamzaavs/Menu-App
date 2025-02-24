@@ -37,6 +37,8 @@ onMounted(async () => {
         <p class="text-xs">Telefon Numarası </p>
         <p class="text-lg font-bold">{{ authStore.user?.phone }}</p>
       </div>
+
+
     </div>
 
   </div>

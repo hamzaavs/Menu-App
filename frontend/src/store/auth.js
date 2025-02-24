@@ -5,7 +5,8 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     isAuthenticated: false,
-    token: localStorage.getItem("token") || null
+    token: localStorage.getItem("token") || null,
+    roles: []
   }),
 
   actions: {
@@ -50,10 +51,12 @@ export const useAuthStore = defineStore('auth', {
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         const response = await api.get("/user/profile/");
         this.user = response.data;
+        this.roles = response.data.roles.map(role => role.name)
+        console.log('Kullanıcı rolleri:', this.roles);
         this.isAuthenticated = true;
       } catch (err) {
         console.log(err.response?.data);
-        this.isAuthenticated = false; // Eğer hata varsa giriş yapılmadı olarak işaretle
+        this.isAuthenticated = false;
       }
     },
 
@@ -66,6 +69,12 @@ export const useAuthStore = defineStore('auth', {
       } catch (err) {
         console.log(err.response?.data)
       }
+    }
+  },
+
+  getters: {
+    isAdmin() {
+      return this.roles.includes('Admin')
     }
   }
 })
