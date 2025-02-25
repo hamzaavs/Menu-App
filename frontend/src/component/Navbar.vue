@@ -17,6 +17,7 @@ const logout = async () => {
       <router-link to="/register" class="bg-white text-orange-500 border border-white rounded px-4 py-2 hover:bg-orange-600 hover:text-white transition">Kayıt Ol</router-link>
     </div>
     <div v-else class="flex space-x-4">
+      <router-link v-if="authStore.isAdmin" to="/dashboard" class="capitalize border border-black rounded px-4 py-2 text-black hover:bg-white hover:text-orange-500 hover:border-white transition">Yönetim Paneli</router-link>
       <router-link to="/profile" class="capitalize border border-black rounded px-4 py-2 text-black hover:bg-white hover:text-orange-500 hover:border-white transition">
         {{ authStore.user?.name }}</router-link>
       <button @click="logout" class="bg-white text-orange-500 border border-white rounded px-4 py-2 hover:bg-orange-600 hover:text-white transition">Çıkış Yap</button>

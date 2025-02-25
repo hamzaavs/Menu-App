@@ -13,7 +13,7 @@ export const useDishStore = defineStore('dish', {
         const response = await api.get('/dishes/list/')
         this.dishes = response.data
       } catch (err) {
-        console.log(err)
+        console.log(err.response?.data)
       }
     },
 
@@ -26,7 +26,7 @@ export const useDishStore = defineStore('dish', {
           stock
         })
       } catch (err) {
-        console.log(err)
+        console.log(err.response?.data)
       }
     },
 
@@ -36,7 +36,28 @@ export const useDishStore = defineStore('dish', {
         this.dish = response.data
         console.log(this.dish)
       } catch (err) {
-        console.log(err)
+        console.log(err.response?.data)
+      }
+    },
+
+    async update(id, name, description, price, stock) {
+      try {
+        await api.put(`dishes/${id}/`, {
+          name,
+          description,
+          price,
+          stock
+        })
+      } catch (err) {
+        console.log(err.response?.data)
+      }
+    },
+
+    async delete(id) {
+      try {
+        await api.delete(`/dishes/${id}/`)
+      } catch (err) {
+        console.log(err.response?.data)
       }
     }
   }

@@ -1,7 +1,8 @@
 <script setup>
-import {reactive} from "vue";
+import {nextTick, reactive} from "vue";
 import {useAuthStore} from "@/store/auth.js";
 import {useDishStore} from "@/store/dish.js";
+import router from "@/router/index.js";
 
 const authStore = useAuthStore();
 const dishStore = useDishStore();
@@ -15,7 +16,11 @@ const dish = reactive({
 
 const addDish = async () => {
   try {
-    dishStore.create(dish.name, dish.description, dish.price, dish.stock);
+    await dishStore.create(dish.name, dish.description, dish.price, dish.stock)
+      .then (async () => {
+        await nextTick();
+        router.push('/dashboard')
+      })
   } catch (err) {
     console.log(err.response?.data)
   }
