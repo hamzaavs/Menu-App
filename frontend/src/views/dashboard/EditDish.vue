@@ -14,16 +14,18 @@ const dishInfo = reactive({
   name: '',
   description: '',
   price: 0.0,
-  stock: 0
+  stock: 0,
+  selectedImage: null
 })
 
-onMounted(() => {
-  dishStore.detail(id)
-})
-
+const handleImageChange = (event) => {
+  dishInfo.selectedImage = event.target.files[0]
+}
 const updateDish = async () => {
   try {
-    await dishStore.update(id, dishInfo.name, dishInfo.description, dishInfo.price, dishInfo.stock)
+
+
+    await dishStore.update(id, dishInfo.name, dishInfo.description, dishInfo.price, dishInfo.stock, dishInfo.selectedImage)
       .then(async () => {
         await nextTick();
         await router.push('/dashboard')
@@ -32,6 +34,10 @@ const updateDish = async () => {
     console.log(err.response?.data)
   }
 }
+
+onMounted(() => {
+  dishStore.detail(id)
+})
 
 </script>
 
@@ -45,6 +51,8 @@ const updateDish = async () => {
       <input v-model="dishInfo.description" class="rounded-md p-3" placeholder="Açıklama" type="text">
       <input v-model="dishInfo.price" class="rounded-md p-3" placeholder="Fiyat" type="number">
       <input v-model="dishInfo.stock" class="rounded-md p-3" placeholder="Stok" type="number">
+      <input type="file" @change="handleImageChange">
+
       <button class="w-28 m-auto bg-white border-solid border border-gray-400 rounded-md" type="submit">Yemek Düzenle
       </button>
     </form>

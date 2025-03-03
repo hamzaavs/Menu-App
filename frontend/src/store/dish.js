@@ -17,13 +17,18 @@ export const useDishStore = defineStore('dish', {
       }
     },
 
-    async create(name, description, price, stock) {
+    async create(name, description, price, stock, image) {
       try {
-        return await api.post('/dishes/', {
-          name,
-          description,
-          price,
-          stock
+        const formData = new FormData()
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('stock', stock);
+        formData.append('image', image)
+        return await api.post('/dishes/', formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
         })
       } catch (err) {
         console.log(err.response?.data)
@@ -40,14 +45,20 @@ export const useDishStore = defineStore('dish', {
       }
     },
 
-    async update(id, name, description, price, stock) {
+    async update(id, name, description, price, stock, image) {
       try {
-        await api.put(`dishes/${id}/`, {
-          name,
-          description,
-          price,
-          stock
-        })
+        const formData = new FormData()
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('stock', stock);
+        formData.append('image', image)
+
+        await api.put(`dishes/${id}/`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            },
+          })
       } catch (err) {
         console.log(err.response?.data)
       }

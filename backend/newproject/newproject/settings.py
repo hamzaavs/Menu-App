@@ -157,6 +157,9 @@ AUTHENTICATION_BACKENDS = (
 
 STATIC_URL = 'static/'
 
+MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = "/images/"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

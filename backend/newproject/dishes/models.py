@@ -7,6 +7,7 @@ class MenuItem(models.Model):
     description = models.TextField()
     price = models.FloatField()
     stock = models.IntegerField()
+    image = models.ImageField(upload_to="dishes")
 
     def __str__(self):
         return self.name

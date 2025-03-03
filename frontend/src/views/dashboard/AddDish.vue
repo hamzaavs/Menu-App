@@ -11,12 +11,21 @@ const dish = reactive({
   name: '',
   description: '',
   price: 0.0,
-  stock: 0
+  stock: 0,
+  selectedImage: null
 });
+
+const handleImageChange = (event) => {
+  dish.selectedImage = event.target.files[0]
+}
 
 const addDish = async () => {
   try {
-    await dishStore.create(dish.name, dish.description, dish.price, dish.stock)
+    if (!dish.selectedImage) {
+      alert("Dosya seçiniz")
+    }
+
+    await dishStore.create(dish.name, dish.description, dish.price, dish.stock, dish.selectedImage)
       .then (async () => {
         await nextTick();
         router.push('/dashboard')
@@ -36,6 +45,7 @@ const addDish = async () => {
       <input v-model="dish.description" class="rounded-md p-3" placeholder="Açıklama" type="text">
       <input v-model="dish.price" class="rounded-md p-3" placeholder="Fiyat" type="number">
       <input v-model="dish.stock" class="rounded-md p-3" placeholder="Stok" type="number">
+      <input type="file" @change="handleImageChange">
 
       <button class="w-28 m-auto bg-white border-solid border border-gray-400 rounded-md" type="submit">Yemek Ekle
       </button>
