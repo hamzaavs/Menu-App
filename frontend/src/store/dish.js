@@ -35,9 +35,9 @@ export const useDishStore = defineStore('dish', {
       }
     },
 
-    async detail(id) {
+    async detail(unique_id) {
       try {
-      const response = await api.get(`/dishes/${id}/`)
+      const response = await api.get(`/dishes/${unique_id}/`)
         this.dish = response.data
         console.log(this.dish)
       } catch (err) {
@@ -45,7 +45,7 @@ export const useDishStore = defineStore('dish', {
       }
     },
 
-    async update(id, name, description, price, stock, image) {
+    async update(unique_id, name, description, price, stock, image) {
       try {
         const formData = new FormData()
         formData.append('name', name);
@@ -54,7 +54,7 @@ export const useDishStore = defineStore('dish', {
         formData.append('stock', stock);
         formData.append('image', image)
 
-        await api.put(`dishes/${id}/`, formData, {
+        await api.put(`dishes/${unique_id}/`, formData, {
             headers: {
               "Content-Type": "multipart/form-data"
             },
@@ -64,9 +64,9 @@ export const useDishStore = defineStore('dish', {
       }
     },
 
-    async delete(id) {
+    async delete(unique_id) {
       try {
-        await api.delete(`/dishes/${id}/`)
+        await api.delete(`/dishes/${unique_id}/`)
       } catch (err) {
         console.log(err.response?.data)
       }

@@ -8,7 +8,7 @@ import router from "@/router/index.js";
 const dishStore = useDishStore()
 const authStore = useAuthStore()
 const route = useRoute()
-const id = route.params.id
+const id = route.params.unique_id
 
 const dishInfo = reactive({
   name: '',

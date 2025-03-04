@@ -56,9 +56,9 @@ onMounted(() => {
             {{ items.stock }} Adet Kaldı
           </td>
           <td class="px-6 py-4 flex flex-row gap-6">
-            <router-link :to="`/edit-dish/${items.id}`" class="font-medium text-blue-600 hover:underline">Düzenle
+            <router-link :to="`/edit-dish/${items.unique_id}`" class="font-medium text-blue-600 hover:underline">Düzenle
             </router-link>
-            <button class="font-medium text-red-600 hover:underline" @click="dishStore.delete(items.id)">Sil</button>
+            <button class="font-medium text-red-600 hover:underline" @click="dishStore.delete(items.unique_id)">Sil</button>
           </td>
           <td></td>
         </tr>

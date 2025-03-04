@@ -7,7 +7,7 @@ const route = useRoute();
 const dishStore = useDishStore();
 const url = "http://127.0.0.1:8000"
 onMounted(() => {
-  dishStore.detail(route.params.id);
+  dishStore.detail(route.params.unique_id);
 });
 </script>
 
@@ -27,7 +27,7 @@ onMounted(() => {
           {{ dishStore.dish.stock }} Adet Kaldı
         </p>
         <p
-          v-else-if="dishStore.dish.stock > 5 || dishStore.dish.stock < 15"
+          v-else-if="dishStore.dish.stock > 5"
           class="w-44 rounded-md text-lg font-semibold text-center text-white px-4 py-3 bg-yellow-600">
           {{ dishStore.dish.stock }} Adet Kaldı
         </p>
@@ -37,7 +37,7 @@ onMounted(() => {
           {{ dishStore.dish.stock }} Adet Kaldı
         </p>
       </div>
-      <button class="mb-14 text-2xl bg-blue-400 text-white w-48 h-20 mx-auto rounded-fulln dev">Sipariş Ver</button>
+      <button class="mb-14 text-2xl bg-blue-400 text-white w-48 h-20 mx-auto rounded-full">Sipariş Ver</button>
     </div>
 
   </div>

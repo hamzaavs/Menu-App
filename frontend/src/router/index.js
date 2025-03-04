@@ -1,11 +1,11 @@
 import { createWebHistory , createRouter } from 'vue-router'
+import {useAuthStore} from "@/store/auth.js";
 
 import Dishes from "@/views/dish/Dishes.vue";
 import DishDetail from "@/views/dish/DishDetail.vue";
 import Register from "@/views/auth/Register.vue";
 import Login from "@/views/auth/Login.vue";
 import Profile from "@/views/Profile.vue";
-import {useAuthStore} from "@/store/auth.js";
 import AddDish from "@/views/dashboard/AddDish.vue";
 import Dashboard from "@/views/dashboard/Dashboard.vue";
 import EditDish from "@/views/dashboard/EditDish.vue";
@@ -18,9 +18,10 @@ const routes = [
         name: 'home'
     },
     {
-        path: `/dish/:id`,
+        path: `/dish/:unique_id`,
         component: DishDetail,
         name: 'dish',
+        props: true,
     },
     {
         path: '/register',
@@ -50,7 +51,7 @@ const routes = [
         name: 'add-dish'
     },
     {
-        path: '/edit-dish/:id',
+        path: '/edit-dish/:unique_id',
         component: EditDish,
         props: true,
         meta: { requiresAuth: true },

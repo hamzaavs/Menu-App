@@ -22,7 +22,7 @@ onMounted(() => {
       <img :src="url+item.image" alt="Yemek Resmi" class="rounded-full mb-5 "/>
       <h1 class="text-title text-2xl font-bold mb-2">{{ item.name }}</h1>
       <p class="text-price text-lg mb-10">{{ item.price }}₺</p>
-      <router-link :to="`/dish/${item.id}`" class="bg-primary text-black p-2 m rounded-md">İncele</router-link>
+      <router-link :to="`/dish/${item.unique_id}`" class="bg-primary text-black p-2 m rounded-md">İncele</router-link>
     </div>
   </div>
 </template>
