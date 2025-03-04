@@ -26,14 +26,14 @@ class DishesCreate(APIView):
 
 
 class Dish(APIView):
-    def get_dish_pk(self, pk):
+    def get_dish_pk(self, unique_id):
         try:
-            return MenuItem.objects.get(pk=pk)
+            return MenuItem.objects.get(unique_id=unique_id)
         except MenuItem.DoesNotExist:
             return None
 
-    def get(self, request, pk):
-        dish = self.get_dish_pk(pk)
+    def get(self, request, unique_id):
+        dish = self.get_dish_pk(unique_id)
         if not dish:
             return Response({
                 'message': 'Yemek bulunamadı'
@@ -41,8 +41,8 @@ class Dish(APIView):
         serializer = MenuItemSerializer(dish)
         return Response(serializer.data)
 
-    def put(self, request, pk):
-        dish = self.get_dish_pk(pk)
+    def put(self, request, unique_id):
+        dish = self.get_dish_pk(unique_id)
         serializer = MenuItemSerializer(dish, data=request.data)
 
         if serializer.is_valid():
@@ -50,8 +50,15 @@ class Dish(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 
+    def delete(self, request, unique_id):
+        try:
+            dish = self.get_dish_pk(unique_id)
+            dish.delete()
+            return Response({
+                'message': 'Yemek silindi'
+            }, status=status.HTTP_204_NO_CONTENT)
+        except MenuItem.DoesNotExist:
+            return Response({
+                'message': 'Yemek bulunamadı'
+            }, status=status.HTTP_404_NOT_FOUND)
 
-    def delete(self, request, pk):
-        dish = self.get_dish_pk(pk)
-        dish.delete()
-        return Response(status.HTTP_204_NO_CONTENT)
